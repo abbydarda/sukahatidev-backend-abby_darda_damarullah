@@ -28,4 +28,6 @@ router.put(
  pesananController.updateStatusOrder
 );
 
+router.get('/marketing/order', [], pesananController.findAllPesananPelanggan);
+
 module.exports = router;
