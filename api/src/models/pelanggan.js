@@ -38,8 +38,32 @@ async function insertPelanggan(payload) {
   throw error;
  }
 }
+async function findAllPelangganExistOrder() {
+ try {
+  // Membentuk query untuk mengambil data pelanggan yang memiliki pesanan
+  const sql = await connection.format(
+   `SELECT a.id AS id_pelanggan, a.nama_brand, a.jenis_usaha, a.no_telp,
+      b.id AS id_cabang, b.nama_cabang, b.kota, b.kebutuhan_produk, b.rata_rata_kuantitas_produk
+   FROM pelanggan a
+   JOIN cabang b ON a.id = b.id_pelanggan
+   WHERE EXISTS (
+   SELECT 1
+   FROM pesanan c
+   WHERE c.id_cabang = b.id
+   )
+   `
+  );
+
+  const [rows, fields] = await connection.query(sql);
+
+  return rows;
+ } catch (error) {
+  throw error;
+ }
+}
 
 module.exports = {
  getPelangganByPhoneNumber,
  insertPelanggan,
+ findAllPelangganExistOrder,
 };
