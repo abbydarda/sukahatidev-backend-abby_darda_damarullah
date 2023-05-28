@@ -1,10 +1,13 @@
 const fs = require('fs');
 const path = require('path');
+const dayjs = require('dayjs');
 
 function errorHandler(err, req, res, next) {
  // Menyimpan log ke dalam file
  const logFilePath = path.join(__dirname, '../logs/error.log');
- const logMessage = `[${new Date().toISOString()}] ${JSON.stringify(err)}\n\n`;
+ const logMessage = `[${dayjs().format(
+  'DD-MM-YYYY HH:mm:ss'
+ )}] ${JSON.stringify(err)}\n\n`;
  fs.appendFileSync(logFilePath, logMessage, 'utf8');
 
  if (err.statusCode) {
