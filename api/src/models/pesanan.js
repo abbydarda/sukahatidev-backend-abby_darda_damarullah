@@ -67,10 +67,43 @@ async function updateStatusPesanan(payload) {
   throw error;
  }
 }
+async function findAllPesananPelanggan() {
+ try {
+  // Membentuk query untuk mengambil data pesanan pelanggan beserta detailnya
+  const sql = await connection.format(`SELECT
+     a.id AS id_pelanggan,
+     a.nama_brand,
+     b.id AS id_cabang,
+     b.nama_cabang,
+     c.id AS id_produk,
+     c.nama_produk,
+     COALESCE(c.klasifikasi, '') AS klasifikasi,
+     c.harga,
+     d.id AS id_pesanan,
+     d.no_pesanan,
+     d.status_pesanan,
+     d.tanggal_pesanan,
+     e.kuantitas,
+     e.subtotal
+   FROM
+     pelanggan a
+     INNER JOIN cabang b ON a.id = b.id_pelanggan
+     INNER JOIN pesanan d ON b.id = d.id_cabang
+     INNER JOIN detail_pesanan e ON d.id = e.id_pesanan
+     INNER JOIN produk c ON e.id_produk = c.id`);
+
+  const [rows, fields] = await connection.query(sql);
+
+  return rows;
+ } catch (error) {
+  throw error;
+ }
+}
 
 module.exports = {
  insertPesanan,
  getPesananById,
  getPesananByNoPesanan,
  updateStatusPesanan,
+ findAllPesananPelanggan,
 };
