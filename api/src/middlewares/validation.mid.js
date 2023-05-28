@@ -34,13 +34,46 @@ const orderValidation = () => {
    .withMessage(
     'Nomor telepon harus diawali dengan 62 dan memiliki panjang 10-14 digit'
    ),
-  body('id_cabang').isInt(),
+  body('id_cabang')
+   .notEmpty()
+   .withMessage('Cabang harus dipilih')
+   .isInt()
+   .withMessage('ID cabang harus berupa angka'),
   body('alamat_pengiriman').isString(),
   body('produk')
    .isArray({ min: 1 })
    .withMessage('Harus memilih produk minimal 1'),
-  body('produk.*.id_produk').isInt(),
-  body('produk.*.kuantitas').isInt(),
+  body('produk.*.id_produk')
+   .isInt()
+   .withMessage('ID produk harus berupa angka'),
+  body('produk.*.kuantitas')
+   .isInt()
+   .withMessage('Kuantitas harus berupa angka'),
+ ];
+};
+
+const cancelOrderValidation = () => {
+ return [
+  body('no_telp')
+   .notEmpty()
+   .withMessage('Nomor telepon harus diisi')
+   .matches(/^62\d{9,13}$/)
+   .withMessage(
+    'Nomor telepon harus diawali dengan 62 dan memiliki panjang 10-14 digit'
+   ),
+  body('no_pesanan').isString().withMessage('No pesanan harus diisi'),
+ ];
+};
+
+const UpdateStatusOrderValidation = () => {
+ return [
+  body('status_pesanan')
+   .isString()
+   .withMessage('Status pesanan harus diisi')
+   .isIn(['Belum Bayar', 'Sudah Bayar', 'Batal'])
+   .withMessage(
+    'Status pesanan hanya bisa diisi `Belum Bayar | Sudah Bayar | Batal`'
+   ),
  ];
 };
 
@@ -66,5 +99,7 @@ const validate = (req, res, next) => {
 module.exports = {
  registerValidation,
  orderValidation,
+ cancelOrderValidation,
+ UpdateStatusOrderValidation,
  validate,
 };
