@@ -20,6 +20,36 @@ async function insertCabang(payload) {
  }
 }
 
+async function getCabangByIdPelanggan(id_pelanggan) {
+ try {
+  const sql = await connection.format(
+   `SELECT id, nama_cabang FROM cabang WHERE id_pelanggan = ?`,
+   [id_pelanggan]
+  );
+
+  const [rows, fields] = await connection.query(sql);
+  return rows;
+ } catch (error) {
+  throw error;
+ }
+}
+
+async function getCabangByIdAndIdPelanggan(payload) {
+ try {
+  const sql = await connection.format(
+   `SELECT * FROM cabang WHERE id = ? AND id_pelanggan = ? LIMIT 1`,
+   payload
+  );
+
+  const [rows, fields] = await connection.query(sql);
+  return rows[0];
+ } catch (error) {
+  throw error;
+ }
+}
+
 module.exports = {
  insertCabang,
+ getCabangByIdPelanggan,
+ getCabangByIdAndIdPelanggan,
 };
