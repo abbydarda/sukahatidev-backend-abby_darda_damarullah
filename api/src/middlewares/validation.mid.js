@@ -25,6 +25,25 @@ const registerValidation = () => {
  ];
 };
 
+const orderValidation = () => {
+ return [
+  body('no_telp')
+   .notEmpty()
+   .withMessage('Nomor telepon harus diisi')
+   .matches(/^62\d{9,13}$/)
+   .withMessage(
+    'Nomor telepon harus diawali dengan 62 dan memiliki panjang 10-14 digit'
+   ),
+  body('id_cabang').isInt(),
+  body('alamat_pengiriman').isString(),
+  body('produk')
+   .isArray({ min: 1 })
+   .withMessage('Harus memilih produk minimal 1'),
+  body('produk.*.id_produk').isInt(),
+  body('produk.*.kuantitas').isInt(),
+ ];
+};
+
 // Middleware untuk menangani validasi
 const validate = (req, res, next) => {
  const errors = validationResult(req);
@@ -46,5 +65,6 @@ const validate = (req, res, next) => {
 
 module.exports = {
  registerValidation,
+ orderValidation,
  validate,
 };
