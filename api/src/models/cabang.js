@@ -20,28 +20,36 @@ async function insertCabang(payload) {
  }
 }
 
+// Mendapatkan data cabang berdasarkan ID pelanggan
 async function getCabangByIdPelanggan(id_pelanggan) {
  try {
+  // Membuat query SQL untuk mendapatkan data cabang berdasarkan ID pelanggan
   const sql = await connection.format(
    `SELECT id, nama_cabang FROM cabang WHERE id_pelanggan = ?`,
    [id_pelanggan]
   );
 
+  // Menjalankan query SQL
   const [rows, fields] = await connection.query(sql);
+
   return rows;
  } catch (error) {
   throw error;
  }
 }
 
+// Mendapatkan data cabang berdasarkan ID cabang dan ID pelanggan
 async function getCabangByIdAndIdPelanggan(payload) {
  try {
+  // Membuat query SQL untuk mendapatkan data cabang berdasarkan ID cabang dan ID pelanggan
   const sql = await connection.format(
    `SELECT * FROM cabang WHERE id = ? AND id_pelanggan = ? LIMIT 1`,
    payload
   );
 
+  // Menjalankan query SQL
   const [rows, fields] = await connection.query(sql);
+
   return rows[0];
  } catch (error) {
   throw error;
