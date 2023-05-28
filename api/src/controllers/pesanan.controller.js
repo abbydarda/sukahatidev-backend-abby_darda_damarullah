@@ -210,8 +210,25 @@ async function updateStatusOrder(req, res, next) {
  }
 }
 
+//Fungsi untuk mengambil semua data pesanan pelanggan
+async function findAllPesananPelanggan(req, res, next) {
+ try {
+  const pesanan = await pesananModel.findAllPesananPelanggan();
+
+  const response = {
+   message: 'Data pesanan berhasil diambil',
+   data: pesanan,
+  };
+
+  res.send(response);
+ } catch (error) {
+  next(error);
+ }
+}
+
 module.exports = {
  orderProduct,
  cancelOrder,
  updateStatusOrder,
+ findAllPesananPelanggan,
 };
