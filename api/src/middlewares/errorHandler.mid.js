@@ -3,6 +3,7 @@ const path = require('path');
 const dayjs = require('dayjs');
 
 function errorHandler(err, req, res, next) {
+ console.error(err);
  // Menyimpan log ke dalam file
  const logFilePath = path.join(__dirname, '../logs/error.log');
  const logMessage = `[${dayjs().format(
