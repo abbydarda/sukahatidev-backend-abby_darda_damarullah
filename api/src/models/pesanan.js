@@ -75,6 +75,7 @@ async function findAllPesananPelanggan() {
      a.nama_brand,
      b.id AS id_cabang,
      b.nama_cabang,
+     b.kota,
      c.id AS id_produk,
      c.nama_produk,
      COALESCE(c.klasifikasi, '') AS klasifikasi,
