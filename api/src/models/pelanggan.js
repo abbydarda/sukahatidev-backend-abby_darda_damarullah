@@ -62,8 +62,21 @@ async function findAllPelangganExistOrder() {
  }
 }
 
+async function findAllPelanggan() {
+ try {
+  const sql = await connection.format(`SELECT * FROM pelanggan`);
+
+  const [rows, fields] = await connection.query(sql);
+
+  return rows;
+ } catch (error) {
+  throw error;
+ }
+}
+
 module.exports = {
  getPelangganByPhoneNumber,
  insertPelanggan,
  findAllPelangganExistOrder,
+ findAllPelanggan,
 };
