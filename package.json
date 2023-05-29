@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "nodemon api/src/server.js",
+    "start:prod": "node api/src/server.js",
     "migration": "node api/src/db/migration.js"
   },
   "keywords": [],
