@@ -3,15 +3,18 @@
 
 Ini merupakan projek test di CV Sukahati Pratama yang meliputi :  
 1. [Setup Project](#setup-project)
-1. [Pesanan](#pesanan)  
+
+2. [Link Demo](#link-demo)
+
+3. [Pesanan](#pesanan)  
 	- [Analisi Kebutuhan](#analisis-pesanan)  
 	- [Solusi](#solusi-pesanan)  
 	- [PoC](#poc-pesanan)  
-2. [Filter](#filter)  
+4. [Filter](#filter)  
 	- [Analisi Kebutuhan](#analisis-filter)  
 	- [Solusi](#solusi-filter)  
 	- [PoC](#poc-filter)  
-3. [Logical](#logical)  
+5. [Logical](#logical)  
 	- [Rotasi String](#rotasi-string)  
 	- [Palindrome](#palindrome)  
   
@@ -47,6 +50,12 @@ Ini merupakan projek test di CV Sukahati Pratama yang meliputi :
 	```bash
 	npm run start:prod
 	```
+    
+## Link Demo
+```bash
+https://sukahatidev-backend-abby.onrender.com/
+```
+
 ## Pesanan  
 ### Analisis Pesanan  
 Dari kebutuhan yang disebutkan, tim marketing perlu memiliki akses terhadap data pelanggan dan pesanan mereka. Mereka juga perlu informasi tentang produk, termasuk harga dan klasifikasinya. Beberapa poin penting yang bisa diambil dari analisis kebutuhan ini adalah:  
